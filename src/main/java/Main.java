@@ -12,6 +12,7 @@ public class Main {
     System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
     WebDriver driver = new ChromeDriver();
     driver.get("http://wrike.com");
+    String urlStart = driver.getCurrentUrl();
     WebElement element = ((ChromeDriver) driver).findElementByClassName("wg-btn--green");
     click(element, driver);
     RandomGenerator randomGenerator = new RandomGenerator();
@@ -20,5 +21,7 @@ public class Main {
     element.sendKeys(email);
     element = ((ChromeDriver) driver).findElementByClassName("modal-form-trial__submit");
     click(element, driver);
+    assert driver.getCurrentUrl() != urlStart;
+
   }
 }
