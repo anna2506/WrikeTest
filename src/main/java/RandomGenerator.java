@@ -1,3 +1,6 @@
+import jdk.jfr.Description;
+import org.junit.Test;
+
 import java.security.SecureRandom;
 import java.util.Random;
 
@@ -19,10 +22,6 @@ public class RandomGenerator {
   }
   public static int generateRandomInt(int minimum, int maximum)
   {
-    /*Random rn = new Random();
-    int n = maximum - minimum + 1;
-    int i = rn.nextInt() % n;
-    int randomNum =  minimum + i;*/
     return minimum + (int)(Math.random()*(maximum - minimum + 1));
   }
 }

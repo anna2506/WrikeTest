@@ -1,10 +1,11 @@
+import jdk.jfr.Description;
 import org.junit.Assert;
+import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -25,6 +26,7 @@ public class Main {
     WebDriver driver = new ChromeDriver();
     driver.get("http://wrike.com");
     String urlStart = driver.getCurrentUrl();
+
     WebElement element = ((ChromeDriver) driver).findElementByClassName("wg-btn--green");
     ((JavascriptExecutor) driver).executeScript("arguments[0].click()", element);
     RandomGenerator randomGenerator = new RandomGenerator();
