@@ -28,48 +28,48 @@ public class Main {
     element.sendKeys(email);
     element = ((ChromeDriver) driver).findElementByClassName("modal-form-trial__submit");
     element.click();
-    sleep();
+    while (driver.getCurrentUrl().equals(urlStart)){sleep();}
     Assert.assertFalse((driver.getCurrentUrl().equals(urlStart)));
     int variant = randomGenerator.generateRandomInt(1, 2);
     switch (variant)
     {
       case(1):
-        element = ((ChromeDriver) driver).findElementByCssSelector("label[for=interest_in_solution_1]");
+        element = ((ChromeDriver) driver).findElementByCssSelector("body > div.wg-layout.wg-layout--outline > main > div > div > div.section.section-resend-main.section-resend-main-va.section-resend-main--survey > div > div.wg-cell.wg-cell--md-6.wg-cell--lg-7 > div > form > div:nth-child(6) > label:nth-child(1) > button");
         break;
       case (2):
-        element = ((ChromeDriver) driver).findElementByCssSelector("label[for=interest_in_solution_2]");
+        element = ((ChromeDriver) driver).findElementByCssSelector("body > div.wg-layout.wg-layout--outline > main > div > div > div.section.section-resend-main.section-resend-main-va.section-resend-main--survey > div > div.wg-cell.wg-cell--md-6.wg-cell--lg-7 > div > form > div:nth-child(6) > label:nth-child(2) > button");
         break;
     }
     element.click();
     variant = randomGenerator.generateRandomInt(1, 5);
-    switch (5)
+    switch (variant)
     {
       case(1):
-        element = driver.findElement(By.xpath("//button[text()='1–5']"));
+        element = ((ChromeDriver) driver).findElementByCssSelector("body > div.wg-layout.wg-layout--outline > main > div > div > div.section.section-resend-main.section-resend-main-va.section-resend-main--survey > div > div.wg-cell.wg-cell--md-6.wg-cell--lg-7 > div > form > div:nth-child(8) > label:nth-child(1) > button");
         break;
       case (2):
-        element = driver.findElement(By.xpath("//button[text()='6-15']"));
+        element = ((ChromeDriver) driver).findElementByCssSelector("body > div.wg-layout.wg-layout--outline > main > div > div > div.section.section-resend-main.section-resend-main-va.section-resend-main--survey > div > div.wg-cell.wg-cell--md-6.wg-cell--lg-7 > div > form > div:nth-child(8) > label:nth-child(2) > button");
         break;
       case (3):
-        element = driver.findElement(By.xpath("//button[text()='16-25']"));
+        element = ((ChromeDriver) driver).findElementByCssSelector("body > div.wg-layout.wg-layout--outline > main > div > div > div.section.section-resend-main.section-resend-main-va.section-resend-main--survey > div > div.wg-cell.wg-cell--md-6.wg-cell--lg-7 > div > form > div:nth-child(8) > label:nth-child(3) > button");
         break;
       case (4):
-        element = driver.findElement(By.xpath("//button[text()='26-50']"));
+        element = ((ChromeDriver) driver).findElementByCssSelector("body > div.wg-layout.wg-layout--outline > main > div > div > div.section.section-resend-main.section-resend-main-va.section-resend-main--survey > div > div.wg-cell.wg-cell--md-6.wg-cell--lg-7 > div > form > div:nth-child(8) > label:nth-child(4) > button");
         break;
       case (5):
-        element = driver.findElement(By.xpath("//button[text()='50+']"));
+        element = ((ChromeDriver) driver).findElementByCssSelector("body > div.wg-layout.wg-layout--outline > main > div > div > div.section.section-resend-main.section-resend-main-va.section-resend-main--survey > div > div.wg-cell.wg-cell--md-6.wg-cell--lg-7 > div > form > div:nth-child(8) > label:nth-child(5) > button");
         break;
     }
     element.click();
     variant = randomGenerator.generateRandomInt(1, 3);
-    switch (3)
+    switch (variant)
     {
       case(1):
-        element = driver.findElement(By.xpath("//button[text()='Yes']"));
+        element = ((ChromeDriver) driver).findElementByCssSelector("body > div.wg-layout.wg-layout--outline > main > div > div > div.section.section-resend-main.section-resend-main-va.section-resend-main--survey > div > div.wg-cell.wg-cell--md-6.wg-cell--lg-7 > div > form > div:nth-child(10) > label:nth-child(1) > button");
         element.click();
         break;
       case (2):
-        element = driver.findElement(By.xpath("//button[text()='No']"));
+        element = ((ChromeDriver) driver).findElementByCssSelector("body > div.wg-layout.wg-layout--outline > main > div > div > div.section.section-resend-main.section-resend-main-va.section-resend-main--survey > div > div.wg-cell.wg-cell--md-6.wg-cell--lg-7 > div > form > div:nth-child(10) > label:nth-child(2) > button");
         element.click();
         break;
       case (3):
