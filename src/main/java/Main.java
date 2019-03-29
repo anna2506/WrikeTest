@@ -1,9 +1,14 @@
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 public class Main {
@@ -87,5 +92,30 @@ public class Main {
     element = ((ChromeDriver) driver).findElementByClassName("js-button");
     ((JavascriptExecutor) driver).executeScript("arguments[0].click()", element);
     Assert.assertFalse(((ChromeDriver) driver).findElementByClassName("again").isDisplayed());
+
+    try{
+      ((ChromeDriver) driver).findElementByCssSelector("body > div.wg-layout.wg-layout--outline > div > div.wg-footer__bottom-section > div > div.wg-footer__social-block > div > ul > li:nth-child(1) > a").isDisplayed();
+      System.out.println("There is Twitter icon");
+      HttpURLConnection huc = (HttpURLConnection)(new URL("https://twitter.com/wrike").openConnection());
+      huc.setRequestMethod("HEAD");
+      huc.connect();
+      int respCode = huc.getResponseCode();
+      if(respCode >= 400){
+        System.out.println("Twitter is a broken link");
+      }
+      else{
+        System.out.println("Twitter is a valid link");
+      }
+    }
+    catch (NoSuchElementException e) {
+      System.out.println("Something went wrong");
+    }
+    catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
+    driver.quit();
   }
 }
