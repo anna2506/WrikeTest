@@ -4,12 +4,16 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 
 
 public class Main {
-  public static void click(WebElement element, WebDriver driver){
-    ((JavascriptExecutor) driver).executeScript("arguments[0].click()", element);
+  public static void sleep(){
+    try {
+      Thread.sleep(1000);
+    }
+    catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
   public static void main(String [] args) {
     System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
@@ -17,19 +21,14 @@ public class Main {
     driver.get("http://wrike.com");
     String urlStart = driver.getCurrentUrl();
     WebElement element = ((ChromeDriver) driver).findElementByClassName("wg-btn--green");
-    click(element, driver);
+    ((JavascriptExecutor) driver).executeScript("arguments[0].click()", element);
     RandomGenerator randomGenerator = new RandomGenerator();
     String email = randomGenerator.generateRandomString(10)+"+wpt@wriketask.qaa";
     element = ((ChromeDriver) driver).findElementByClassName("modal-form-trial__input");
     element.sendKeys(email);
     element = ((ChromeDriver) driver).findElementByClassName("modal-form-trial__submit");
-    click(element, driver);
-    try {
-      Thread.sleep(2500);
-    }
-    catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    element.click();
+    sleep();
     Assert.assertFalse((driver.getCurrentUrl().equals(urlStart)));
     int variant = randomGenerator.generateRandomInt(1, 2);
     switch (variant)
@@ -41,12 +40,12 @@ public class Main {
         element = ((ChromeDriver) driver).findElementByCssSelector("label[for=interest_in_solution_2]");
         break;
     }
-    click(element, driver);
+    element.click();
     variant = randomGenerator.generateRandomInt(1, 5);
-    switch (variant)
+    switch (5)
     {
       case(1):
-        element = driver.findElement(By.xpath("//button[text()='1-5']"));
+        element = driver.findElement(By.xpath("//button[text()='1–5']"));
         break;
       case (2):
         element = driver.findElement(By.xpath("//button[text()='6-15']"));
@@ -61,29 +60,32 @@ public class Main {
         element = driver.findElement(By.xpath("//button[text()='50+']"));
         break;
     }
-    click(element, driver);
-    element = ((ChromeDriver) driver).findElementByClassName("js-button");
-    click(element, driver);
-    variant = randomGenerator.generateRandomInt(1, 2);
-    switch (variant)
+    element.click();
+    variant = randomGenerator.generateRandomInt(1, 3);
+    switch (3)
     {
       case(1):
         element = driver.findElement(By.xpath("//button[text()='Yes']"));
+        element.click();
         break;
       case (2):
         element = driver.findElement(By.xpath("//button[text()='No']"));
+        element.click();
         break;
       case (3):
-        element = driver.findElement(By.xpath("//button[text()='Other']"));
+        element = ((ChromeDriver) driver).findElementByClassName("switch--fullwidth");
+        element.click();
+        String answer = randomGenerator.generateRandomString(5);
+        element = ((ChromeDriver) driver).findElementByCssSelector("input[placeholder='Your comment']");
+        element.sendKeys(answer);
         break;
     }
-    click(element, driver);
-    try {
-      Thread.sleep(1000);
-    }
-    catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    element = ((ChromeDriver) driver).findElementByClassName("js-survey-submit");
+    element.click();
+    while(((ChromeDriver) driver).findElementByClassName("survey").isDisplayed()){sleep();}
+    Assert.assertFalse(((ChromeDriver) driver).findElementByClassName("survey").isDisplayed());
+    element = ((ChromeDriver) driver).findElementByClassName("js-button");
+    ((JavascriptExecutor) driver).executeScript("arguments[0].click()", element);
     Assert.assertFalse(((ChromeDriver) driver).findElementByClassName("again").isDisplayed());
   }
 }
